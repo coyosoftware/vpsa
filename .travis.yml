@@ -1,0 +1,16 @@
+language: ruby
+rvm:
+- 2.0.0
+
+addons:
+  code_climate:
+    repo_token: 5b5c9617f7250055e1b48d7f1297c5b36a6861d9431607a8b310dc22dc046ba8
+    
+bundler_args: --without development
+
+notifications:
+  email:
+    recipients:
+      - gberdugo@gmail.com
+    on_failure: change
+    on_success: never
