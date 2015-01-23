@@ -30,24 +30,32 @@ Create a new instance of VPSA class passing your access token:
 
 With the client instance, you can access the following resources:
 
-* Foo (client.foo) **Only creation**
-* Bar (client.bar) **Not Implemented Yet**
+* Terceiros (client.third_parties) **Listing and finding**
 
 ## Using the resources
-### Foo
-All resources implement a **create** method.
+### Listing
+All resources implement a **list** method.
 
-It can accept a hash with the parameters as described in the API [documentation] or an Entity object that reflects the API fields.
+It can accept an Entity object that reflects the searchable API fields.
 
 Currently the following entities are implemented:
 
-* [Foo](lib/vpsa/entity/foo.rb)
+* [Terceiros](lib/vpsa/searcher/administrative/third_party_searcher.rb)
+
+### Finding
+All resources implement a **find** method.
+
+It finds the resource with the passed ID.
+
+```ruby
+	Vpsa.new(YOUR_ACCESS_TOKEN).third_parties.find(4)
+```
 
 ### Reading the response
 All methods return an Vpsa::Client::Response object. This objects contains the following attributes:
 
 ```ruby
-	response = Vpsa.new(YOUR_ACCESS_TOKEN).foo.create(foo_entity)
+	response = Vpsa.new(YOUR_ACCESS_TOKEN).third_parties.list
 	
 	response.status			# Contains the status code of the request
 	response.payload		# Contains the return data (JSON) of the request
