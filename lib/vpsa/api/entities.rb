@@ -1,12 +1,12 @@
 module Vpsa
   module Api
-    class ThirdParties < Client
-      require_all 'vpsa/searcher/administrative', 'third_party_searcher'
+    class Entities < Client
+      require_all 'vpsa/searcher/administrative', 'entity_searcher'
       
-      base_uri "https://www.vpsa.com.br/apps/api/terceiros"
+      base_uri "https://www.vpsa.com.br/apps/api/entidades"
 
       def list(searcher = nil)
-        raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Administrative::ThirdPartySearcher)
+        raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Administrative::EntitySearcher)
         
         return parse_response(self.class.get("/", :body => build_body(searcher.as_parameter),  :headers => header)) if searcher
         return parse_response(self.class.get("/", :body => build_body,  :headers => header)) unless searcher

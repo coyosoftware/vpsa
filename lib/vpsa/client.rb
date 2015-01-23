@@ -2,19 +2,13 @@ require "httparty"
 
 module Vpsa
   class Client
-    class NoAccessTokenError < StandardError
-      def message
-        "Please provide an access token"
-      end  
-    end
-    
     extend Vpsa::ClassMethods
     include HTTParty
     
     default_options.update(verify: false)
-    default_options.update(header: {"Content-Type" => "application/json", "Accept" => "application/json"})
+    parser Proc.new {|b| JSON.parse(b) rescue b}
     
-    require_all 'vpsa/api', 'third_parties'
+    require_all 'vpsa/api', 'third_parties', 'entities', 'default_entries'
     
     attr_accessor :access_token
     
@@ -25,6 +19,14 @@ module Vpsa
     
     def third_parties
       Vpsa::Api::ThirdParties.new(@access_token)
+    end
+    
+    def entities
+      Vpsa::Api::Entities.new(@access_token)
+    end
+    
+    def default_entries
+      Vpsa::Api::DefaultEntries.new(@access_token)
     end
     
     protected
@@ -48,6 +50,12 @@ module Vpsa
         @payload = response.parsed_response
         @raw_response = response
       end
+    end
+    
+    class NoAccessTokenError < StandardError
+      def message
+        "Please provide an access token"
+      end  
     end
   end
 end
