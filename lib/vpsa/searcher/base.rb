@@ -1,9 +1,11 @@
 require 'vpsa/init_from_hash'
 
 module Vpsa
-  module Entity
+  module Searcher
     class Base
-      include Vpsa::InitFromHash
+      include InitFromHash
+      
+      attr_accessor :inicio, :quantidade
       
       def as_parameter
         variables = instance_variables.map do |name|

@@ -4,7 +4,7 @@ module Vpsa
   module Entity
     module Administrative
       class ThirdParty < Base
-        attr_accessor :id, :active, :updated_at, :name, :fantasy_name, :document, :emails, :rg, :birth_date, :ie
+        attr_accessor :id, :ativo, :"dataAlteracao", :nome, :"nomeFantasia", :documento, :emails, :rg, :nascimento, :ie
       end
     end
   end
