@@ -31,6 +31,8 @@ Create a new instance of VPSA class passing your access token:
 With the client instance, you can access the following resources:
 
 * Terceiros (client.third_parties) **Listing and finding**
+* Entidades (client.entities) **Listing and finding**
+* Lançamentos Padrões (client.default_entries) **Listing and finding**
 
 ## Using the resources
 ### Listing
@@ -41,6 +43,8 @@ It can accept an Entity object that reflects the searchable API fields.
 Currently the following entities are implemented:
 
 * [Terceiros](lib/vpsa/searcher/administrative/third_party_searcher.rb)
+* [Entidades](lib/vpsa/searcher/administrative/entity_searcher.rb)
+* [Lançamentos Padrões](lib/vpsa/searcher/financial/default_entry_searcher.rb)
 
 ### Finding
 All resources implement a **find** method.
