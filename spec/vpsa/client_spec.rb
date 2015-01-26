@@ -12,4 +12,8 @@ RSpec.describe Vpsa::Client do
   it "should return a new Vpsa::Api::DefaultEntries" do
     expect(Vpsa.new("abc").default_entries.class).to eq(Vpsa::Api::DefaultEntries)
   end
+  
+  it "should return a new Vpsa::Api::Provisions" do
+    expect(Vpsa.new("abc").provisions.class).to eq(Vpsa::Api::Provisions)
+  end
 end
