@@ -33,6 +33,7 @@ With the client instance, you can access the following resources:
 * Terceiros (client.third_parties) **Listing and finding**
 * Entidades (client.entities) **Listing and finding**
 * Lançamentos Padrões (client.default_entries) **Listing and finding**
+* Provisões (client.provisions) **Only Creation**
 
 ## Using the resources
 ### Listing
@@ -53,6 +54,15 @@ It finds the resource with the passed ID.
 
 ```ruby
 	Vpsa.new(YOUR_ACCESS_TOKEN).third_parties.find(4)
+```
+
+### Creation
+Some resources implement a **create** method.
+
+It creates a new resource base on the information passed via Hash.
+
+```ruby
+	Vpsa.new(YOUR_ACCESS_TOKEN).provisions.create({:"idLancamentoPadrao" => 3, :"idEntidade" => 1, :"idTerceiro" => 15, :"data" => "21-10-2012", :"valor" =>123.40, :"historico" => "histórico da provisão"})
 ```
 
 ### Reading the response
