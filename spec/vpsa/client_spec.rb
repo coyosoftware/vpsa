@@ -16,4 +16,8 @@ RSpec.describe Vpsa::Client do
   it "should return a new Vpsa::Api::Provisions" do
     expect(Vpsa.new("abc").provisions.class).to eq(Vpsa::Api::Provisions)
   end
+  
+  it "should return a new Vpsa::Api::UserData" do
+    expect(Vpsa.new("abc").user_data.class).to eq(Vpsa::Api::UserData)
+  end
 end

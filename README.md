@@ -34,6 +34,7 @@ With the client instance, you can access the following resources:
 * Entidades (client.entities) **Listing and finding**
 * Lançamentos Padrões (client.default_entries) **Listing and finding**
 * Provisões (client.provisions) **Only Creation**
+* Dados Login (client.user_data)
 
 ## Using the resources
 ### Listing
@@ -63,6 +64,13 @@ It creates a new resource base on the information passed via Hash.
 
 ```ruby
 	Vpsa.new(YOUR_ACCESS_TOKEN).provisions.create({:"idLancamentoPadrao" => 3, :"idEntidade" => 1, :"idTerceiro" => 15, :"data" => "21-10-2012", :"valor" =>123.40, :"historico" => "histórico da provisão"})
+```
+
+### Getting User Data
+You can get the token owner information by calling the following method:
+
+```ruby
+	Vpsa.new(YOUR_ACCESS_TOKEN).user_data.get
 ```
 
 ### Reading the response
