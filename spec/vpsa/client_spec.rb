@@ -20,4 +20,8 @@ RSpec.describe Vpsa::Client do
   it "should return a new Vpsa::Api::UserData" do
     expect(Vpsa.new("abc").user_data.class).to eq(Vpsa::Api::UserData)
   end
+  
+  it "should return a new Vpsa::Api::Installments" do
+    expect(Vpsa.new("abc").installments.class).to eq(Vpsa::Api::Installments)
+  end
 end

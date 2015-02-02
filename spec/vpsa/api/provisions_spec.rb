@@ -3,7 +3,7 @@ require 'spec_helper'
 RSpec.describe Vpsa::Api::Provisions do
   let(:header) {{"Content-Type" => "application/json", "Accept" => "application/json"}}
   
-  describe "listing" do
+  describe "creation" do
     before(:each) do
       stub_request(:post, "https://www.vpsa.com.br/apps/api/provisoes-contas/").to_return(:status => 201)
     end

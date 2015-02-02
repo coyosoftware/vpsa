@@ -8,7 +8,7 @@ module Vpsa
     default_options.update(verify: false)
     parser Proc.new {|b| JSON.parse(b) rescue b}
     
-    require_all 'vpsa/api', 'third_parties', 'entities', 'default_entries', 'provisions', 'user_data'
+    require_all 'vpsa/api', 'third_parties', 'entities', 'default_entries', 'provisions', 'user_data', 'installments'
     
     attr_accessor :access_token
     
@@ -35,6 +35,10 @@ module Vpsa
     
     def user_data
       Vpsa::Api::UserData.new(@access_token)
+    end
+    
+    def installments
+      Vpsa::Api::Installments.new(@access_token)
     end
     
     protected
