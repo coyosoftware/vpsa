@@ -2,6 +2,7 @@ module Vpsa
   module Api
     class ThirdParties < Client
       require_all 'vpsa/searcher/administrative', 'third_party_searcher'
+      require_all 'vpsa/entity/administrative', 'third_party', 'address', 'phone'
       
       base_uri "https://www.vpsa.com.br/apps/api/terceiros"
 
@@ -15,6 +16,13 @@ module Vpsa
       def find(id)
         return parse_response(self.class.get("/#{id}", :body => build_body,  :headers => header))
       end
+      
+      def create(data)
+        return parse_response(self.class.post("/", :body => build_body(data), :headers => header)) if data.is_a?(Hash)
+        return parse_response(self.class.post("/", :body => build_body(data.as_parameter), :headers => header)) if data.is_a?(Vpsa::Entity::Administrative::ThirdParty)
+        raise ArgumentError
+      end
+      alias :new :create
     end
   end
 end

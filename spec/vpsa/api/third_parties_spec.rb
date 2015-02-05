@@ -38,4 +38,49 @@ RSpec.describe Vpsa::Api::ThirdParties do
       Vpsa.new("abc").third_parties.find(5)
     end
   end
+  
+  describe "creating" do
+    let(:third_party_params) {{:nome => "Nome do terceiro", :documento => "023.168.132-00", :token => "abc"}}
+    
+    before(:each) do
+      @third_party = Vpsa::Entity::Administrative::ThirdParty.new({"id" => "5", "nome" => "Nome do terceiro", "documento" => "023.168.132-00",
+        "rg" => "42.943.412-1", "dataNascimento" => "12-08-1980"})
+      
+      @third_party.emails = ["email@email.com", "other@email.com"]
+      
+      @third_party.enderecos << Vpsa::Entity::Administrative::Address.new({"tipo" => "AVENIDA", "logradouro" => "9 de Julho", "numero" => "900", "bairro" => "CENTRO",
+        "complemento" => "APTO 1", "cep" => "12000111", "codigoIBGECidade" => "3554102", "tipoEndereco" => "ENDERECO_COBRANCA"})
+      @third_party.enderecos << Vpsa::Entity::Administrative::Address.new({"tipo" => "RUA", "logradouro" => "15 de Novembro", "numero" => "1020", "bairro" => "JD. MARIA",
+        "complemento" => "APTO 1", "cep" => "12600123", "codigoIBGECidade" => "3554102", "tipoEndereco" => "ENDERECO_SEDE"})
+        
+      @third_party.telefones << Vpsa::Entity::Administrative::Phone.new({"ddi" => "55", "ddd" => "12", "numero" => "12341234"})
+      @third_party.telefones << Vpsa::Entity::Administrative::Phone.new({"ddi" => "0", "ddd" => "31", "numero" => "12340000", "ramal" => "1234"})
+      
+      @third_party.classes = ["SOCIO_PROPRIETARIO", "FUNCIONARIO"]
+      
+      stub_request(:post, "https://www.vpsa.com.br/apps/api/terceiros/").to_return(:status => 201)
+    end
+    
+    describe "with raw parameters" do
+      it "should post to the third party url" do
+        expect(Vpsa::Api::ThirdParties).to receive(:post).with("/", :body => third_party_params.to_json, :headers => header).and_call_original
+        
+        Vpsa.new("abc").third_parties.create({:nome => "Nome do terceiro", :documento => "023.168.132-00"})
+      end
+    end
+    
+    describe "with entity parameter" do
+      it "should post to the third party url" do
+        expect(Vpsa::Api::ThirdParties).to receive(:post).with("/", :body => @third_party.as_parameter.merge!(:token => "abc").to_json, :headers => header).and_call_original
+        
+        Vpsa.new("abc").third_parties.create(@third_party)
+      end
+    end
+    
+    describe "with invalid parameter" do
+      it "should raise ArgumentError when passing neither a Hash nor a ThirdParty" do
+        expect{Vpsa.new("abc").third_parties.create(Array.new)}.to raise_error(ArgumentError)
+      end
+    end
+  end
 end
