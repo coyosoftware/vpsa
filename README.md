@@ -30,7 +30,7 @@ Create a new instance of VPSA class passing your access token:
 
 With the client instance, you can access the following resources:
 
-* Terceiros (client.third_parties) **Listing and finding**
+* Terceiros (client.third_parties) **Listing, finding and creation**
 * Entidades (client.entities) **Listing and finding**
 * Lançamentos Padrões (client.default_entries) **Listing and finding**
 * Provisões (client.provisions) **Only Creation**
