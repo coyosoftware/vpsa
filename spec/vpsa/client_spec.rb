@@ -24,4 +24,8 @@ RSpec.describe Vpsa::Client do
   it "should return a new Vpsa::Api::Installments" do
     expect(Vpsa.new("abc").installments.class).to eq(Vpsa::Api::Installments)
   end
+
+  it "should return a new Vpsa::Api::CreditLimits" do
+    expect(Vpsa.new("abc").credit_limits.class).to eq(Vpsa::Api::CreditLimits)
+  end
 end
