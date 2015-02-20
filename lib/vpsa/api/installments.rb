@@ -2,6 +2,7 @@ module Vpsa
   module Api
     class Installments < Client
       require_all 'vpsa/searcher/financial', 'installment_searcher'
+      require_all 'vpsa/entity/financial', 'installment'
       
       base_uri "https://www.vpsa.com.br/apps/api/crediarios"
       
@@ -12,7 +13,7 @@ module Vpsa
         return parse_response(self.class.get("/", :body => build_body,  :headers => header)) unless searcher
       end
       
-      def create(data)
+      def configure(data)
         return parse_response(self.class.post("/", :body => build_body(data), :headers => header))
       end
       
