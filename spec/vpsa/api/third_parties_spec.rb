@@ -87,11 +87,11 @@ RSpec.describe Vpsa::Api::ThirdParties do
   describe "credit limit" do
     context "information" do
       before(:each) do
-        stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/credit_limit").to_return(:status => 200)
+        stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito").to_return(:status => 200)
       end
 
       it "should issue a get to the third party credit limit url" do
-        expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/credit_limit", :body => {:token => "abc"}.to_json, :headers => header).and_call_original
+        expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/limites_credito", :body => {:token => "abc"}.to_json, :headers => header).and_call_original
         
         Vpsa.new("abc").third_parties.credit_limit_information(5)
       end
@@ -103,12 +103,12 @@ RSpec.describe Vpsa::Api::ThirdParties do
       before(:each) do
         @credit_limit = Vpsa::Entity::Commercial::CreditLimit.new({"total" => BigDecimal.new("154.32")})
         
-        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/credit_limit").to_return(:status => 200)
+        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito").to_return(:status => 200)
       end
       
       describe "with raw parameters" do
         it "should put to the third party credit limit url" do
-          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/credit_limit", :body => credit_limit_params.to_json, :headers => header).and_call_original
+          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito", :body => credit_limit_params.to_json, :headers => header).and_call_original
           
           Vpsa.new("abc").third_parties.update_credit_limit(5, {"total" => BigDecimal.new("154.32")})
         end
@@ -116,7 +116,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
       
       describe "with entity parameter" do
         it "should put to the third party credit limit url" do
-          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/credit_limit", :body => @credit_limit.as_parameter.merge!(:token => "abc").to_json, :headers => header).and_call_original
+          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito", :body => @credit_limit.as_parameter.merge!(:token => "abc").to_json, :headers => header).and_call_original
           
           Vpsa.new("abc").third_parties.update_credit_limit(5, @credit_limit)
         end
@@ -126,6 +126,34 @@ RSpec.describe Vpsa::Api::ThirdParties do
         it "should raise ArgumentError when passing neither a Hash nor a CreditLimit" do
           expect{Vpsa.new("abc").third_parties.update_credit_limit(5, Array.new)}.to raise_error(ArgumentError)
         end
+      end
+    end
+
+    context "blocking" do
+      let(:credit_limit_block_params) {{"justificativa" => "Cliente caloteiro", :token => "abc"}}
+
+      before(:each) do
+        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito/bloquear").to_return(:status => 200)
+      end
+
+      it "should put to the third party credit block url" do
+        expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito/bloquear", :body => credit_limit_block_params.to_json, :headers => header).and_call_original
+        
+        Vpsa.new("abc").third_parties.block_credit_limit(5, "Cliente caloteiro")
+      end
+    end
+
+    context "unlocking" do
+      let(:credit_limit_unlock_params) {{"justificativa" => "Cliente pagou", :token => "abc"}}
+
+      before(:each) do
+        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito/desbloquear").to_return(:status => 200)
+      end
+
+      it "should put to the third party credit unlock url" do
+        expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito/desbloquear", :body => credit_limit_unlock_params.to_json, :headers => header).and_call_original
+        
+        Vpsa.new("abc").third_parties.unlock_credit_limit(5, "Cliente pagou")
       end
     end
   end

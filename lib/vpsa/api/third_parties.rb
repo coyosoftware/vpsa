@@ -3,6 +3,7 @@ module Vpsa
     class ThirdParties < Client
       require_all 'vpsa/searcher/administrative', 'third_party_searcher'
       require_all 'vpsa/entity/administrative', 'third_party', 'address', 'phone'
+      require_all 'vpsa/entity/commercial', 'credit_limit'
       
       base_uri "https://www.vpsa.com.br/apps/api/terceiros"
 
@@ -25,13 +26,21 @@ module Vpsa
       alias :new :create
 
       def credit_limit_information(id)
-        return parse_response(self.class.get("/#{id}/credit_limit", :body => build_body,  :headers => header))
+        return parse_response(self.class.get("/#{id}/limites_credito", :body => build_body,  :headers => header))
       end
 
       def update_credit_limit(id, data)
-        return parse_response(self.class.put("/#{id}/credit_limit", :body => build_body(data), :headers => header)) if data.is_a?(Hash)
-        return parse_response(self.class.put("/#{id}/credit_limit", :body => build_body(data.as_parameter), :headers => header)) if data.is_a?(Vpsa::Entity::Commercial::CreditLimit)
+        return parse_response(self.class.put("/#{id}/limites_credito", :body => build_body(data), :headers => header)) if data.is_a?(Hash)
+        return parse_response(self.class.put("/#{id}/limites_credito", :body => build_body(data.as_parameter), :headers => header)) if data.is_a?(Vpsa::Entity::Commercial::CreditLimit)
         raise ArgumentError
+      end
+
+      def block_credit_limit(id, justification)
+        return parse_response(self.class.put("/#{id}/limites_credito/bloquear", :body => build_body({"justificativa" => justification}),  :headers => header))
+      end
+
+      def unlock_credit_limit(id, justification)
+        return parse_response(self.class.put("/#{id}/limites_credito/desbloquear", :body => build_body({"justificativa" => justification}),  :headers => header))
       end
     end
   end

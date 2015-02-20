@@ -4,7 +4,7 @@ module Vpsa
   module Entity
     module Commercial
       class CreditLimit < Base
-        attr_accessor :"idTerceiro", :total
+        attr_accessor :total
       end
     end
   end
