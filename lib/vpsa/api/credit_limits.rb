@@ -9,9 +9,7 @@ module Vpsa
 
 			return parse_response(self.class.get("/", :body => build_body(searcher.as_parameter),  :headers => header)) if searcher
 			return parse_response(self.class.get("/", :body => build_body,  :headers => header)) unless searcher
-		end
-
-		
+		end	
     end
   end
 end

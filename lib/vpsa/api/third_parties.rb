@@ -16,13 +16,17 @@ module Vpsa
       def find(id)
         return parse_response(self.class.get("/#{id}", :body => build_body,  :headers => header))
       end
-      
+
       def create(data)
         return parse_response(self.class.post("/", :body => build_body(data), :headers => header)) if data.is_a?(Hash)
         return parse_response(self.class.post("/", :body => build_body(data.as_parameter), :headers => header)) if data.is_a?(Vpsa::Entity::Administrative::ThirdParty)
         raise ArgumentError
       end
       alias :new :create
+
+      def credit_limit_information(id)
+        return parse_response(self.class.get("/#{id}/credit_limit", :body => build_body,  :headers => header))
+      end
     end
   end
 end

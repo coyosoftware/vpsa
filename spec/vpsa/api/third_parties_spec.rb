@@ -83,4 +83,16 @@ RSpec.describe Vpsa::Api::ThirdParties do
       end
     end
   end
+
+  describe "credit limit" do
+    before(:each) do
+      stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/credit_limit").to_return(:status => 200)
+    end
+
+    it "should issue a get to the third party credit limit url" do
+      expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/credit_limit", :body => {:token => "abc"}.to_json, :headers => header).and_call_original
+      
+      Vpsa.new("abc").third_parties.credit_limit_information(5)
+    end
+  end
 end
