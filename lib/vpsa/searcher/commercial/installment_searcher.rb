@@ -2,7 +2,7 @@ require 'vpsa/searcher/base'
 
 module Vpsa
   module Searcher
-    module Financial
+    module Commercial
       class InstallmentSearcher < Base
       end
     end
