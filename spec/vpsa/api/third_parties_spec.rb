@@ -85,14 +85,48 @@ RSpec.describe Vpsa::Api::ThirdParties do
   end
 
   describe "credit limit" do
-    before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/credit_limit").to_return(:status => 200)
+    context "information" do
+      before(:each) do
+        stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/credit_limit").to_return(:status => 200)
+      end
+
+      it "should issue a get to the third party credit limit url" do
+        expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/credit_limit", :body => {:token => "abc"}.to_json, :headers => header).and_call_original
+        
+        Vpsa.new("abc").third_parties.credit_limit_information(5)
+      end
     end
 
-    it "should issue a get to the third party credit limit url" do
-      expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/credit_limit", :body => {:token => "abc"}.to_json, :headers => header).and_call_original
+    context "modification" do
+      let(:credit_limit_params) {{"total" => BigDecimal.new("154.32"), :token => "abc"}}
+
+      before(:each) do
+        @credit_limit = Vpsa::Entity::Commercial::CreditLimit.new({"total" => BigDecimal.new("154.32")})
+        
+        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/credit_limit").to_return(:status => 200)
+      end
       
-      Vpsa.new("abc").third_parties.credit_limit_information(5)
+      describe "with raw parameters" do
+        it "should put to the third party credit limit url" do
+          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/credit_limit", :body => credit_limit_params.to_json, :headers => header).and_call_original
+          
+          Vpsa.new("abc").third_parties.update_credit_limit(5, {"total" => BigDecimal.new("154.32")})
+        end
+      end
+      
+      describe "with entity parameter" do
+        it "should put to the third party credit limit url" do
+          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/credit_limit", :body => @credit_limit.as_parameter.merge!(:token => "abc").to_json, :headers => header).and_call_original
+          
+          Vpsa.new("abc").third_parties.update_credit_limit(5, @credit_limit)
+        end
+      end
+      
+      describe "with invalid parameter" do
+        it "should raise ArgumentError when passing neither a Hash nor a CreditLimit" do
+          expect{Vpsa.new("abc").third_parties.update_credit_limit(5, Array.new)}.to raise_error(ArgumentError)
+        end
+      end
     end
   end
 end
