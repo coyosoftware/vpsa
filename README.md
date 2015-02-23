@@ -35,6 +35,7 @@ With the client instance, you can access the following resources:
 * Lançamentos Padrões (client.default_entries) **Listing and finding**
 * Provisões (client.provisions) **Only Creation**
 * Dados Login (client.user_data)
+* Classes de Clientes (client.client_classes) **Listing and finding**
 
 ## Using the resources
 ### Listing
@@ -47,6 +48,7 @@ Currently the following entities are implemented:
 * [Terceiros](lib/vpsa/searcher/administrative/third_party_searcher.rb)
 * [Entidades](lib/vpsa/searcher/administrative/entity_searcher.rb)
 * [Lançamentos Padrões](lib/vpsa/searcher/financial/default_entry_searcher.rb)
+* [Classes de Clientes](lib/vpsa/searcher/operational/client_class_searcher.rb)
 
 ### Finding
 All resources implement a **find** method.
@@ -74,7 +76,7 @@ You can get the token owner information by calling the following method:
 ```
 
 ### Reading the response
-All methods return an Vpsa::Client::Response object. This objects contains the following attributes:
+All methods return a Vpsa::Client::Response object. This objects contains the following attributes:
 
 ```ruby
 	response = Vpsa.new(YOUR_ACCESS_TOKEN).third_parties.list
