@@ -156,5 +156,17 @@ RSpec.describe Vpsa::Api::ThirdParties do
         Vpsa.new("abc").third_parties.unlock_credit_limit(5, "Cliente pagou")
       end
     end
+
+    context "history" do
+      before(:each) do
+        stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito/historico").to_return(:status => 200)
+      end
+
+      it "should issue a get to the third party credit history url" do
+        expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/limites_credito/historico", :body => {:token => "abc"}.to_json, :headers => header).and_call_original
+        
+        Vpsa.new("abc").third_parties.credit_limit_history(5)
+      end
+    end
   end
 end
