@@ -158,14 +158,16 @@ RSpec.describe Vpsa::Api::ThirdParties do
     end
 
     context "history" do
+      let(:history_params) {{"desde" => Date.parse("01/01/2015"), "ate" => Date.parse("11/01/2015"), :token => "abc"}}
+
       before(:each) do
         stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito/historico").to_return(:status => 200)
       end
 
       it "should issue a get to the third party credit history url" do
-        expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/limites_credito/historico", :body => {:token => "abc"}.to_json, :headers => header).and_call_original
+        expect(Vpsa::Api::ThirdParties).to receive(:get).with("/5/limites_credito/historico", :body => history_params.to_json, :headers => header).and_call_original
         
-        Vpsa.new("abc").third_parties.credit_limit_history(5)
+        Vpsa.new("abc").third_parties.credit_limit_history(5, Date.parse("01/01/2015"), Date.parse("11/01/2015"))
       end
     end
   end

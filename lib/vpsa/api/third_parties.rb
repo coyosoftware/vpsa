@@ -43,8 +43,8 @@ module Vpsa
         return parse_response(self.class.put("/#{id}/limites_credito/desbloquear", :body => build_body({"justificativa" => justification}),  :headers => header))
       end
 
-      def credit_limit_history(id)
-        return parse_response(self.class.get("/#{id}/limites_credito/historico", :body => build_body,  :headers => header))
+      def credit_limit_history(id, start_date, end_date)
+        return parse_response(self.class.get("/#{id}/limites_credito/historico", :body => build_body({"desde" => start_date, "ate" => end_date}),  :headers => header))
       end
     end
   end
