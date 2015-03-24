@@ -5,7 +5,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
   
   describe "listing" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/terceiros/").to_return(:status => 200)
     end
     
     it "should issue a get to the third_parties url" do
@@ -29,7 +29,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
   
   describe "finding" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/terceiros/5").to_return(:status => 200)
     end
     
     it "should issue a get to the third party url" do
@@ -58,7 +58,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
       
       @third_party.classes = ["SOCIO_PROPRIETARIO", "FUNCIONARIO"]
       
-      stub_request(:post, "https://www.vpsa.com.br/apps/api/terceiros/").to_return(:status => 201)
+      stub_request(:post, "#{Vpsa::API_ADDRESS}/terceiros/").to_return(:status => 201)
     end
     
     describe "with raw parameters" do
@@ -87,7 +87,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
   describe "credit limit" do
     context "information" do
       before(:each) do
-        stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito").to_return(:status => 200)
+        stub_request(:get, "#{Vpsa::API_ADDRESS}/terceiros/5/limites_credito").to_return(:status => 200)
       end
 
       it "should issue a get to the third party credit limit url" do
@@ -103,7 +103,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
       before(:each) do
         @credit_limit = Vpsa::Entity::Commercial::CreditLimit.new({"total" => BigDecimal.new("154.32")})
         
-        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito").to_return(:status => 200)
+        stub_request(:put, "#{Vpsa::API_ADDRESS}/terceiros/5/limites_credito").to_return(:status => 200)
       end
       
       describe "with raw parameters" do
@@ -133,7 +133,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
       let(:credit_limit_block_params) {{"justificativa" => "Cliente caloteiro", :token => "abc"}}
 
       before(:each) do
-        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito/bloquear").to_return(:status => 200)
+        stub_request(:put, "#{Vpsa::API_ADDRESS}/terceiros/5/limites_credito/bloquear").to_return(:status => 200)
       end
 
       it "should put to the third party credit block url" do
@@ -147,7 +147,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
       let(:credit_limit_unlock_params) {{"justificativa" => "Cliente pagou", :token => "abc"}}
 
       before(:each) do
-        stub_request(:put, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito/desbloquear").to_return(:status => 200)
+        stub_request(:put, "#{Vpsa::API_ADDRESS}/terceiros/5/limites_credito/desbloquear").to_return(:status => 200)
       end
 
       it "should put to the third party credit unlock url" do
@@ -161,7 +161,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
       let(:history_params) {{"desde" => Date.parse("01/01/2015"), "ate" => Date.parse("11/01/2015"), :token => "abc"}}
 
       before(:each) do
-        stub_request(:get, "https://www.vpsa.com.br/apps/api/terceiros/5/limites_credito/historico").to_return(:status => 200)
+        stub_request(:get, "#{Vpsa::API_ADDRESS}/terceiros/5/limites_credito/historico").to_return(:status => 200)
       end
 
       it "should issue a get to the third party credit history url" do

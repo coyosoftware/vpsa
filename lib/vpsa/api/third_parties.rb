@@ -5,7 +5,7 @@ module Vpsa
       require_all 'vpsa/entity/administrative', 'third_party', 'address', 'phone'
       require_all 'vpsa/entity/commercial', 'credit_limit'
       
-      base_uri "https://www.vpsa.com.br/apps/api/terceiros"
+      base_uri "#{Vpsa::API_ADDRESS}/terceiros"
 
       def list(searcher = nil)
         raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Administrative::ThirdPartySearcher)

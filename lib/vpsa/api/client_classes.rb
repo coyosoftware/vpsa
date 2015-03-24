@@ -3,7 +3,7 @@ module Vpsa
     class ClientClasses < Client
       require_all 'vpsa/searcher/operational', 'client_class_searcher'
       
-      base_uri "https://www.vpsa.com.br/apps/api/classificacoes-clientes"
+      base_uri "#{Vpsa::API_ADDRESS}/classificacoes-clientes"
 
       def list(searcher = nil)
         raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Operational::ClientClassSearcher)

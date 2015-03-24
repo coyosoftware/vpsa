@@ -5,7 +5,7 @@ RSpec.describe Vpsa::Api::CreditLimits do
   
   describe "listing" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/limitescredito/").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/limitescredito/").to_return(:status => 200)
     end
     
     it "should issue a get to the credit_limits url" do

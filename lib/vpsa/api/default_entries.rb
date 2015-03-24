@@ -3,7 +3,7 @@ module Vpsa
     class DefaultEntries < Client
       require_all 'vpsa/searcher/financial', 'default_entry_searcher'
       
-      base_uri "https://www.vpsa.com.br/apps/api/lancamentos-padroes"
+      base_uri "#{Vpsa::API_ADDRESS}/lancamentos-padroes"
 
       def list(searcher = nil)
         raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Financial::DefaultEntrySearcher)

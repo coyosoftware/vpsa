@@ -5,7 +5,7 @@ RSpec.describe Vpsa::Api::ClientClasses do
   
   describe "listing" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/classificacoes-clientes/").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/classificacoes-clientes/").to_return(:status => 200)
     end
     
     it "should issue a get to the client classes url" do
@@ -29,7 +29,7 @@ RSpec.describe Vpsa::Api::ClientClasses do
   
   describe "finding" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/classificacoes-clientes/5").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/classificacoes-clientes/5").to_return(:status => 200)
     end
     
     it "should issue a get to the client classes url" do

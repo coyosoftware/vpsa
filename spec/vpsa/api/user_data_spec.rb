@@ -5,7 +5,7 @@ RSpec.describe Vpsa::Api::UserData do
   
   describe "finding" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/dados-login/").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/dados-login/").to_return(:status => 200)
     end
     
     it "should issue a get to the dados-login url" do

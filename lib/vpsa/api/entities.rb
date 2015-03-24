@@ -3,7 +3,7 @@ module Vpsa
     class Entities < Client
       require_all 'vpsa/searcher/administrative', 'entity_searcher'
       
-      base_uri "https://www.vpsa.com.br/apps/api/entidades"
+      base_uri "#{Vpsa::API_ADDRESS}/entidades"
 
       def list(searcher = nil)
         raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Administrative::EntitySearcher)

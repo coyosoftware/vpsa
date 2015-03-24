@@ -3,10 +3,11 @@ module Vpsa
     class Installments < Client
       require_all 'vpsa/entity/commercial', 'installment'
       
-      base_uri "https://www.vpsa.com.br/apps/api/configuracao-credito"
+      base_uri "#{Vpsa::API_ADDRESS}/configuracao-credito"
           
       def configure(data)
-        return parse_response(self.class.put("/", :body => build_body(data), :headers => header))
+        #return parse_response(self.class.put("/", :body => build_body(data), :headers => header))
+        return parse_response(self.class.put("/", :body => data.to_json, :headers => header))
       end
       
       def information

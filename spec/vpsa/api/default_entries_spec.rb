@@ -5,7 +5,7 @@ RSpec.describe Vpsa::Api::DefaultEntries do
   
   describe "listing" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/lancamentos-padroes/").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/lancamentos-padroes/").to_return(:status => 200)
     end
     
     it "should issue a get to the default_entries url" do
@@ -29,7 +29,7 @@ RSpec.describe Vpsa::Api::DefaultEntries do
   
   describe "finding" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/lancamentos-padroes/5").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/lancamentos-padroes/5").to_return(:status => 200)
     end
     
     it "should issue a get to the default entry url" do

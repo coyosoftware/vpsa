@@ -5,7 +5,7 @@ RSpec.describe Vpsa::Api::Entities do
   
   describe "listing" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/entidades/").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/entidades/").to_return(:status => 200)
     end
     
     it "should issue a get to the entities url" do
@@ -29,7 +29,7 @@ RSpec.describe Vpsa::Api::Entities do
   
   describe "finding" do
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/entidades/5").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/entidades/5").to_return(:status => 200)
     end
     
     it "should issue a get to the entity url" do
