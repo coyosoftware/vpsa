@@ -36,6 +36,7 @@ With the client instance, you can access the following resources:
 * Provisões (client.provisions) **Only Creation**
 * Dados Login (client.user_data)
 * Classes de Clientes (client.client_classes) **Listing and finding**
+* Contas a Receber (client.receipts) **Only listing**
 
 ## Using the resources
 ### Listing
@@ -48,6 +49,7 @@ Currently the following entities are implemented:
 * [Terceiros](lib/vpsa/searcher/administrative/third_party_searcher.rb)
 * [Entidades](lib/vpsa/searcher/administrative/entity_searcher.rb)
 * [Lançamentos Padrões](lib/vpsa/searcher/financial/default_entry_searcher.rb)
+* [Contas a Receber](lib/vpsa/searcher/financial/receipt_searcher.rb)
 * [Classes de Clientes](lib/vpsa/searcher/operational/client_class_searcher.rb)
 
 ### Finding
