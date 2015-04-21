@@ -12,6 +12,11 @@ module Vpsa
     		return parse_response(self.class.get("/", :body => build_body,  :headers => header)) unless searcher
         
     	end
+      
+      def find(id)
+        return parse_response(self.class.get("/#{id}", :body => build_body,  :headers => header))
+      end
+      
    	end
   end
 end
