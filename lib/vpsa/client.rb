@@ -54,9 +54,9 @@ module Vpsa
       Vpsa::Api::ClientClasses.new(@access_token)
     end
     
-    # def sales
-    #   Vpsa::Api::Sales.new(@access_token)
-    # end
+    def sales
+      Vpsa::Api::Sales.new(@access_token)
+    end
     
     protected
       def header
