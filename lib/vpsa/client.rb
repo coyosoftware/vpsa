@@ -9,7 +9,7 @@ module Vpsa
     default_options.update(verify: false)
     parser Proc.new {|b| JSON.parse(b) rescue b}
     
-    require_all 'vpsa/api', 'third_parties', 'entities', 'default_entries', 'provisions', 'user_data', 'installments', 'credit_limits', 'client_classes', 'receipts'
+    require_all 'vpsa/api', 'third_parties', 'entities', 'default_entries', 'provisions', 'user_data', 'installments', 'credit_limits', 'client_classes', 'receipts', 'sales'
     
     attr_accessor :access_token
     
@@ -53,6 +53,10 @@ module Vpsa
     def client_classes
       Vpsa::Api::ClientClasses.new(@access_token)
     end
+    
+    # def sales
+    #   Vpsa::Api::Sales.new(@access_token)
+    # end
     
     protected
       def header
