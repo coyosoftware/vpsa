@@ -4,7 +4,7 @@ module Vpsa
   LIBNAME = 'vpsa'
   LIBDIR = File.expand_path("../#{LIBNAME}", __FILE__)
 
-  API_ADDRESS = "https://www.vpsa.com.br/apps/api"
+  API_ADDRESS = "http://www.vpsa.com.br/apps/api"
   #API_ADDRESS = "http://192.168.1.204:8080/vpsa/api"
   
   class << self
