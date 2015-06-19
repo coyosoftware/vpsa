@@ -6,7 +6,7 @@ RSpec.describe Vpsa::Api::Sales do
   describe "information" do
     
     before(:each) do
-      stub_request(:get, "https://www.vpsa.com.br/apps/api/externa/historico-vendas-terceiro/buscar?terceiro=1").
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/externa/historico-vendas-terceiro/buscar?terceiro=1").
         with(:body => "{\"token\":\"abc\"}",
              :headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json'}).
         to_return(:status => 200, :body => "", :headers => {})
