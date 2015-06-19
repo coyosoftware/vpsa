@@ -3,7 +3,7 @@ module Vpsa
     class CreditLimits < Client
   	  require_all 'vpsa/searcher/commercial', 'credit_limit_searcher'
   	  
-  	  base_uri "#{Vpsa::API_ADDRESS}/limitescredito"
+  	  base_uri "#{Vpsa::API_ADDRESS}/limites_credito"
 
   	  def list(searcher = nil)
     		raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Commercial::CreditLimitSearcher)
