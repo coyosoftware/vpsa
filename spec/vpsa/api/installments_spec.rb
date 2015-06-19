@@ -25,7 +25,7 @@ RSpec.describe Vpsa::Api::Installments do
     it "should issue a post to the installments url" do
       expect(Vpsa::Api::Installments).to receive(:put).with("/", :body => installment_param.merge!({:token => "abc"}).to_json, :headers => header).and_call_original
       
-      Vpsa.new("abc").installments.configure(installment_param)
+      Vpsa.new("abc").installments.configure( installment_param)
     end
   end
 end

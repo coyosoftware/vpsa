@@ -2,16 +2,17 @@ require 'spec_helper'
 
 RSpec.describe Vpsa::Entity::Commercial::Installment do
   describe "as_parameter" do
-    let(:installment_as_parameter) {{"bloquearSemAnalise" => true, "bloqueio" => "MANUAL", "mensagemBloqueio" => "Seu crédito está bloqueado! :(",
-      "liberarValorExcedente" => false, "liberarBloqueioManual" => true, "venderSemAnalise" => false, "creditoMaximoPorCliente" => true, 
-      "valorCreditoMaximoPorCliente" => BigDecimal.new("1000.35"), "calculoValorCredito" => "LIMITE_SOBRE_RENDA", 
-      "limiteMensalMaximo" => "SOBRE_TOTAL_DE_CREDITO"}}
+    
+    let(:installment_as_parameter) {{"bloquearClienteSemAnalise" => true, "bloqueioAutomatico" => true, "mensagemBloqueio" => "Seu crédito está bloqueado! :(",
+      "permissaoValorExcedente" => false, "permiteLiberarBloqueioManual" => true, "permiteVenderSemAnalise" => false, "valorCredMaximoCliente" => true, 
+      "creditoMaximoCliente" => BigDecimal.new("1000.35"), "limiteMensal" => "SOBRE_TOTAL_DE_CREDITO", "limiteCreditoSobreRenda" => true,
+      "limiteSobreRenda" => BigDecimal.new("10.35")}}
       
     it "should return the installment as parameter" do
-      installment = Vpsa::Entity::Commercial::Installment.new({"bloquearSemAnalise" => true, "bloqueio" => "MANUAL", "mensagemBloqueio" => "Seu crédito está bloqueado! :(",
-      "liberarValorExcedente" => false, "liberarBloqueioManual" => true, "venderSemAnalise" => false, "creditoMaximoPorCliente" => true, 
-      "valorCreditoMaximoPorCliente" => BigDecimal.new("1000.35"), "calculoValorCredito" => "LIMITE_SOBRE_RENDA", 
-      "limiteMensalMaximo" => "SOBRE_TOTAL_DE_CREDITO"})
+      installment = Vpsa::Entity::Commercial::Installment.new({"bloquearClienteSemAnalise" => true, "bloqueioAutomatico" => true, "mensagemBloqueio" => "Seu crédito está bloqueado! :(",
+      "permissaoValorExcedente" => false, "permiteLiberarBloqueioManual" => true, "permiteVenderSemAnalise" => false, "valorCredMaximoCliente" => true, 
+      "creditoMaximoCliente" => BigDecimal.new("1000.35"), "limiteMensal" => "SOBRE_TOTAL_DE_CREDITO", "limiteCreditoSobreRenda" => true,
+      "limiteSobreRenda" => BigDecimal.new("10.35")})
       
       expect(installment.as_parameter).to eq(installment_as_parameter)
     end

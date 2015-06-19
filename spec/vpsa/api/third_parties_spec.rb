@@ -103,12 +103,12 @@ RSpec.describe Vpsa::Api::ThirdParties do
       before(:each) do
         @credit_limit = Vpsa::Entity::Commercial::CreditLimit.new({"total" => BigDecimal.new("154.32")})
         
-        stub_request(:put, "#{Vpsa::API_ADDRESS}/terceiros/5/limites_credito").to_return(:status => 200)
+        stub_request(:put, "#{Vpsa::API_ADDRESS}/terceiros/5/limites_credito/5").to_return(:status => 200)
       end
       
       describe "with raw parameters" do
         it "should put to the third party credit limit url" do
-          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito", :body => credit_limit_params.to_json, :headers => header).and_call_original
+          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito/5", :body => credit_limit_params.to_json, :headers => header).and_call_original
           
           Vpsa.new("abc").third_parties.update_credit_limit(5, {"total" => BigDecimal.new("154.32")})
         end
@@ -116,7 +116,7 @@ RSpec.describe Vpsa::Api::ThirdParties do
       
       describe "with entity parameter" do
         it "should put to the third party credit limit url" do
-          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito", :body => @credit_limit.as_parameter.merge!(:token => "abc").to_json, :headers => header).and_call_original
+          expect(Vpsa::Api::ThirdParties).to receive(:put).with("/5/limites_credito/5", :body => @credit_limit.as_parameter.merge!(:token => "abc").to_json, :headers => header).and_call_original
           
           Vpsa.new("abc").third_parties.update_credit_limit(5, @credit_limit)
         end

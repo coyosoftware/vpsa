@@ -30,8 +30,8 @@ module Vpsa
       end
 
       def update_credit_limit(id, data)
-        return parse_response(self.class.put("/#{id}/limites_credito", :body => build_body(data), :headers => header)) if data.is_a?(Hash)
-        return parse_response(self.class.put("/#{id}/limites_credito", :body => build_body(data.as_parameter), :headers => header)) if data.is_a?(Vpsa::Entity::Commercial::CreditLimit)
+        return parse_response(self.class.put("/#{id}/limites_credito/#{id}", :body => build_body(data), :headers => header)) if data.is_a?(Hash)
+        return parse_response(self.class.put("/#{id}/limites_credito/#{id}", :body => build_body(data.as_parameter), :headers => header)) if data.is_a?(Vpsa::Entity::Commercial::CreditLimit)
         raise ArgumentError
       end
 
