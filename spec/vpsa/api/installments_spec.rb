@@ -17,15 +17,15 @@ RSpec.describe Vpsa::Api::Installments do
   
   describe "configuration" do
     before(:each) do
-      stub_request(:put, "#{Vpsa::API_ADDRESS}/configuracao-credito/").to_return(:status => 201)
+      stub_request(:put, "#{Vpsa::API_ADDRESS}/configuracao-credito/1").to_return(:status => 201)
     end
     
     let(:installment_param) {{}}
     
     it "should issue a post to the installments url" do
-      expect(Vpsa::Api::Installments).to receive(:put).with("/", :body => installment_param.merge!({:token => "abc"}).to_json, :headers => header).and_call_original
+      expect(Vpsa::Api::Installments).to receive(:put).with("/1", :body => installment_param.merge!({:token => "abc"}).to_json, :headers => header).and_call_original
       
-      Vpsa.new("abc").installments.configure( installment_param)
+      Vpsa.new("abc").installments.configure(1, installment_param)
     end
   end
 end

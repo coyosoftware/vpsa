@@ -36,16 +36,13 @@ module Vpsa
       end
 
       def block_credit_limit(id, justification)
-        return parse_response(self.class.put("/#{id}/limites_credito/bloquear", :body => build_body({"justificativa" => justification}),  :headers => header))
+        return parse_response(self.class.put("/#{id}/limites_credito/bloquear", :body => build_body({"motivo" => justification}),  :headers => header))
       end
 
       def unlock_credit_limit(id, justification)
-        return parse_response(self.class.put("/#{id}/limites_credito/desbloquear", :body => build_body({"justificativa" => justification}),  :headers => header))
+        return parse_response(self.class.put("/#{id}/limites_credito/desbloquear", :body => build_body({"motivo" => justification}),  :headers => header))
       end
 
-      def credit_limit_history(id, start_date, end_date)
-        return parse_response(self.class.get("/#{id}/limites_credito/historico", :body => build_body({"desde" => start_date, "ate" => end_date}),  :headers => header))
-      end
     end
   end
 end

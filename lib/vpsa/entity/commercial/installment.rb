@@ -13,33 +13,3 @@ module Vpsa
   end
 end
 
-
-# private boolean bloquearClienteSemAnalise;//
-# private boolean bloqueioAutomatico;//
-# private String mensagemBloqueio;//
-# private boolean permissaoValorExcedente;//
-#
-# private boolean permiteLiberarBloqueioManual;//
-# private boolean permiteVenderSemAnalise;//
-#
-# private BigDecimal creditoMaximoCliente;//
-# private boolean valorCredMaximoCliente;//
-#
-#
-# private String limiteMensal;//
-#
-# private boolean limiteCreditoSobreRenda;
-# private BigDecimal limiteSobreRenda;
-
-# private BigDecimal totalCredito;
-
-
-
-
-
-
-
-
-# private boolean bloquearPorChequeDevolvido;
-#
-//

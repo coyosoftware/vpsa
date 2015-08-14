@@ -26,4 +26,22 @@ RSpec.describe Vpsa::Api::CreditLimits do
       expect{Vpsa.new("abc").credit_limits.list(Array.new)}.to raise_error(ArgumentError)
     end
   end
+  
+  
+  
+  context "history" do
+    let(:history_params) {{"desde" => Date.parse("01/01/2015"), "ate" => Date.parse("11/01/2015"), idTerceiro: 5, :token => "abc"}}
+
+    before(:each) do
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/limites_credito/historico_bloqueio").to_return(:status => 200)
+    end
+
+    it "should issue a get to the third party credit history url" do
+      expect(Vpsa::Api::CreditLimits).to receive(:get).with("/historico_bloqueio", :body => history_params.to_json, :headers => header).and_call_original
+      
+      Vpsa.new("abc").credit_limits.block_history(5, Date.parse("01/01/2015"), Date.parse("11/01/2015"))
+    end
+  end
+  
+  
 end

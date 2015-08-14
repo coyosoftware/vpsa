@@ -5,8 +5,8 @@ module Vpsa
       
       base_uri "#{Vpsa::API_ADDRESS}/configuracao-credito"
           
-      def configure(data)
-        return parse_response(self.class.put("/", :body => build_body(data), :headers => header))
+      def configure(id, data)
+        return parse_response(self.class.put("/#{id}", :body => build_body(data), :headers => header))
       end
       
       def information
