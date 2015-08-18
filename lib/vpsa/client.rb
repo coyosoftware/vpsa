@@ -5,7 +5,8 @@ module Vpsa
     extend Vpsa::ClassMethods
     include HTTParty
     
-    debug_output $stdout
+    #debug_output $stdout
+    
     default_options.update(verify: false)
     parser Proc.new {|b| JSON.parse(b) rescue b}
     
