@@ -31,16 +31,18 @@ Create a new instance of VPSA class passing your access token:
 With the client instance, you can access the following resources:
 
 * Classes de Clientes (client.client_classes) **Listing and finding**
-* Limite de Créditos (client.credit_limits) ** Listing and block history **
-* Lançamentos Padrões (client.default_entries) **Listing and finding**
-* Entidades (client.entities) **Listing and finding**
 * Configuração de crédito (client.installments) **Saving and information**
+* Contas a Receber (client.receipts) **Listing and finding**
+* Dados Login (client.user_data)
+* Empresas (client.companies) **Listing and finding**
+* Entidades (client.entities) **Listing and finding**
+* Histórico de Vendas (client.sales_history) **Finding and more details **
+* Lançamentos Padrões (client.default_entries) **Listing and finding**
+* Limite de Créditos (client.credit_limits) **Listing and block history**
 * Pedidos de venda (client.orders) **Listing and finding**
 * Provisões (client.provisions) **Only Creation**
-* Contas a Receber (client.receipts) **Listing and finding**
-* Histórico de Vendas (client.sales_history) **Finding and more details **
+* Representantes (client.sellers) **Listing and finding**
 * Terceiros (client.third_parties) **Listing, finding, creation, credit limit information, credit limit updating, blocking/unblocking credit**
-* Dados Login (client.user_data)
 
 ## Using the resources
 ### Listing
@@ -50,13 +52,15 @@ It can accept an Entity object that reflects the searchable API fields.
 
 Currently the following entities are implemented:
 
-* [Terceiros](lib/vpsa/searcher/administrative/third_party_searcher.rb)
-* [Entidades](lib/vpsa/searcher/administrative/entity_searcher.rb)
-* [Limite de Crédito](lib/vpsa/searcher/commercial/credit_limit_searcher.rb)
-* [Lançamentos Padrões](lib/vpsa/searcher/financial/default_entry_searcher.rb)
-* [Contas a Receber](lib/vpsa/searcher/financial/receipt_searcher.rb)
 * [Classes de Clientes](lib/vpsa/searcher/operational/client_class_searcher.rb)
+* [Contas a Receber](lib/vpsa/searcher/financial/receipt_searcher.rb)
+* [Empresas](lib/vpsa/searcher/administrative/company_searcher.rb)
+* [Entidades](lib/vpsa/searcher/administrative/entity_searcher.rb)
+* [Lançamentos Padrões](lib/vpsa/searcher/financial/default_entry_searcher.rb)
+* [Limite de Crédito](lib/vpsa/searcher/commercial/credit_limit_searcher.rb)
 * [Pedidos de Venda](lib/vpsa/searcher/operational/order_searcher.rb)
+* [Representantes](lib/vpsa/searcher/operational/seller_searcher.rb)
+* [Terceiros](lib/vpsa/searcher/administrative/third_party_searcher.rb)
 
 ### Finding
 All resources implement a **find** method.
