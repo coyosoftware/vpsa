@@ -32,4 +32,12 @@ RSpec.describe Vpsa::Client do
   it "should return a new Vpsa::Api::ClientClasses" do
     expect(Vpsa.new("abc").client_classes.class).to eq(Vpsa::Api::ClientClasses)
   end
+
+  it "should return a new Vpsa::Api::SalesHistory" do
+    expect(Vpsa.new("abc").sales_history.class).to eq(Vpsa::Api::SalesHistory)
+  end
+
+  it "should return a new Vpsa::Api::Orders" do
+    expect(Vpsa.new("abc").orders.class).to eq(Vpsa::Api::Orders)
+  end
 end
