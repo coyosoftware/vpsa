@@ -11,7 +11,8 @@ module Vpsa
     parser Proc.new {|b| JSON.parse(b) rescue b}
     
     require_all 'vpsa/api', 'third_parties', 'entities', 'default_entries', 'provisions', 'user_data', 'installments', 'credit_limits', 
-      'client_classes', 'receipts', 'sales_history', 'orders', 'companies', 'sellers', 'products', 'category_levels', 'product_categories'
+      'client_classes', 'receipts', 'sales_history', 'orders', 'companies', 'sellers', 'products', 'category_levels', 'product_categories',
+      'payment_conditions'
     
     attr_accessor :access_token
     
@@ -82,6 +83,10 @@ module Vpsa
     
     def product_categories
       Vpsa::Api::ProductCategories.new(@access_token)
+    end
+
+    def payment_conditions
+      Vpsa::Api::PaymentConditions.new(@access_token)
     end
     
     protected
