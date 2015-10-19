@@ -13,7 +13,7 @@ RSpec.describe Vpsa::Api::Products do
     it "should issue a post to the products url" do
       expect(Vpsa::Api::Products).to receive(:post).with("/", :body => product_param.merge!({:token => "abc"}).to_json, :headers => header).and_call_original
       
-      Vpsa.new("abc").products.save(product_param)
+      Vpsa.new("abc").products.save(Vpsa::Entity::Commercial::Product.new)
     end
   end
   
@@ -25,7 +25,7 @@ RSpec.describe Vpsa::Api::Products do
     it "should issue a put to the installments url" do
       expect(Vpsa::Api::Products).to receive(:put).with("/1", :body => product_param.merge!({:token => "abc"}).to_json, :headers => header).and_call_original
       
-      Vpsa.new("abc").products.update(1, product_param)
+      Vpsa.new("abc").products.update(1, Vpsa::Entity::Commercial::Product.new)
     end
   end
 end

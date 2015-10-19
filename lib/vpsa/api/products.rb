@@ -6,11 +6,11 @@ module Vpsa
       base_uri "#{Vpsa::API_ADDRESS}/produtos"
           
       def save(data)
-        return parse_response(self.class.post("/", :body => build_body(data),  :headers => header))
+        return parse_response(self.class.post("/", :body => build_body(data.as_parameter),  :headers => header))
       end
       
       def update(id, data)
-        return parse_response(self.class.put("/#{id}", :body => build_body(data), :headers => header))
+        return parse_response(self.class.put("/#{id}", :body => build_body(data.as_parameter), :headers => header))
       end
     end
   end

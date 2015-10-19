@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe Vpsa::Api::Orders do
   let(:header) {{"Content-Type" => "application/json", "Accept" => "application/json"}}
+  let(:order_param) {{}}
   
   describe "listing" do
     before(:each) do
@@ -38,4 +39,18 @@ RSpec.describe Vpsa::Api::Orders do
       Vpsa.new("abc").orders.find(5)
     end
   end
+
+  describe "save" do
+    before(:each) do
+      stub_request(:post, "#{Vpsa::API_ADDRESS}/pedidos/").to_return(:status => 201)
+    end
+
+    it "should issue a post to the orders url" do
+      order = Vpsa::Entity::Commercial::Order.new
+
+      expect(Vpsa::Api::Orders).to receive(:post).with("/", :body => order.as_parameter.merge!({:token => "abc"}).to_json, :headers => header).and_call_original
+      Vpsa.new("abc").orders.save(order)
+    end
+  end
+
 end
