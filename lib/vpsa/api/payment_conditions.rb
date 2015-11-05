@@ -3,7 +3,7 @@ module Vpsa
     class PaymentConditions < Client
       require_all 'vpsa/searcher/financial', 'payment_condition_searcher'
 
-      base_uri "#{Vpsa::API_ADDRESS}/planos-pagamento-compras"
+      base_uri "#{Vpsa::API_ADDRESS}/planos-pagamento"
 
       def list(searcher = nil)
         raise ArgumentError unless searcher.nil? || searcher.is_a?(Vpsa::Searcher::Financial::PaymentConditionSearcher)

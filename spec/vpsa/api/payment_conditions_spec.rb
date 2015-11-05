@@ -5,7 +5,7 @@ RSpec.describe Vpsa::Api::PaymentConditions do
 
   describe "list" do
     before(:each) do
-      stub_request(:get, "#{Vpsa::API_ADDRESS}/planos-pagamento-compras/").to_return(:status => 200)
+      stub_request(:get, "#{Vpsa::API_ADDRESS}/planos-pagamento/").to_return(:status => 200)
     end
     
     it "should issue a get to the product categories url" do

@@ -4,7 +4,7 @@ module Vpsa
   module Searcher
     module Financial
       class PaymentConditionSearcher < Base
-        attr_accessor :desde, :ate, :alteradoApos, :descricao
+        attr_accessor :inicio, :quantidade, :alteradoApos, :documentoTerceiro
       end
     end
   end
