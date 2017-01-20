@@ -1,3 +1,3 @@
-# OLD NAME
+# VPSA
 
-Moved to [new name](https://github.com/coyosoftware/varejonline).
+Moved to [varejonline](https://github.com/coyosoftware/varejonline).
