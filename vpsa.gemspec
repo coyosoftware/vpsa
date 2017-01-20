@@ -20,4 +20,10 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency('httparty', "~> 0.13")
   spec.add_development_dependency "bundler", "~> 1.7"
+
+  spec.post_install_message = <<-MESSAGE
+  !    The 'vpsa' gem has been deprecated and has been replaced by 'varejonline'.
+  !    See: https://rubygems.org/gems/varejonline
+  !    And: https://github.com/coyosoftware/varejonline
+  MESSAGE
 end
